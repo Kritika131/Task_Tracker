@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import ColorSection from './component/ColorSection';
+import FontSection from './component/FontSection';
+import TextSection from './component/TextSection';
+import UndoRedo from './component/UndoRedo';
+import { MyContext } from './component/contextapi';
+
+
+
 
 function App() {
+  const [color,setColor] = useState("#65625e",);
+   const [font,setFont] = useState("'Poppins', sans-serif");
+   const [undo,setUndo] = useState('');
+   const [redo,setRedo] =useState("")
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <MyContext.Provider value = {{color,setColor,font,setFont,undo,setUndo,redo,setRedo}}>
+    <div className='flex justify-between  h-screen w-screen px-28 py-16 '>
+      <UndoRedo/>
+      <TextSection />
+      <div className='flex flex-col gap-6' >
+        <FontSection/>
+        <ColorSection/>
+      </div>
     </div>
+    </MyContext.Provider>
   );
 }
 
